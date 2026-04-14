@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ЛОМОНОСОВ-2026 | Секция Журналистика</title>
+  <style>
+    :root {
+      --bg: #f7f1ea;
+      --bg-soft: #fffaf5;
+      --panel: rgba(255, 252, 247, 0.86);
+      --text: #3b1f24;
+      --muted: #7a5b60;
+      --line: rgba(95, 47, 58, 0.12);
+      --accent: #8a2f45;
+      --accent-2: #b85e73;
+      --gold: #c8a96b;
+      --shadow: 0 18px 40px rgba(95, 47, 58, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(200,169,107,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(184,94,115,0.14), transparent 24%),
+        linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 18px;
+    }
+
+    .app {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 320px minmax(290px, 420px) 240px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .left,
+    .right {
+      padding: 22px;
+    }
+
+    .left h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .sup {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(138, 47, 69, 0.08);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .section-line {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .section-line b {
+      color: var(--accent);
+    }
+
+    .description {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .control-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .control-item,
+    .note {
+      padding: 13px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.54);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .control-item b,
+    .note b {
+      color: var(--text);
+    }
+
+    .center {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .topbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(1px); }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 10px 24px rgba(138, 47, 69, 0.22);
+    }
+
+    .ghost {
+      background: rgba(138, 47, 69, 0.08);
+      color: var(--accent);
+    }
+
+    .game-shell {
+      width: 100%;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,248,242,0.92));
+      border: 1px solid var(--line);
+      padding: 14px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #f9f2ea 0%, #f3e5d7 100%);
+      border: 1px solid rgba(95, 47, 58, 0.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.46);
+    }
+
+    .caption {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .mobile-controls {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .mobile-controls button {
+      min-height: 52px;
+      font-size: 20px;
+      border-radius: 18px;
+      background: rgba(138, 47, 69, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(138, 47, 69, 0.1);
+    }
+
+    .drop-btn {
+      grid-column: span 3;
+      font-size: 16px !important;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), #e6cf9a) !important;
+      color: #4b3320 !important;
+    }
+
+    .stats {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.54);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .mini-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 14px 0 10px;
+    }
+
+    #nextCanvas {
+      max-width: 170px;
+      aspect-ratio: 1/1;
+      background: linear-gradient(180deg, #fff9f3, #f6ecde);
+    }
+
+    .footer-sign {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+        max-width: 470px;
+      }
+
+      .left { order: 1; }
+      .center { order: 2; }
+      .right { order: 3; }
+
+      body {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .left,
+      .right,
+      .center {
+        padding: 16px;
+      }
+
+      .left h1 {
+        font-size: 28px;
+      }
+
+      .brand-title {
+        font-size: 14px;
+      }
+
+      .mobile-controls button {
+        min-height: 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="panel left">
+      <div class="sup">ЛОМОНОСОВ-2026</div>
+      <h1>Journ Tetris</h1>
+      <p class="section-line"><b>Секция «Журналистика»</b></p>
+      <div class="description">
+        Игра работает и <b>на компьютере</b>, и <b>на телефоне</b>.
+        На компьютере — клавиши, на телефоне — большие кнопки управления под игровым полем.
+        Некоторые клетки фигур оформлены как двойные изображения: <code>journ.jpg</code> + <code>lomonosov.jpg</code>.
+      </div>
+
+      <div class="control-list">
+        <div class="control-item"><b>Компьютер:</b> ← → двигать, ↑ вращать, ↓ ускорить, пробел — мгновенно вниз.</div>
+        <div class="control-item"><b>Телефон:</b> используй кнопки под полем — влево, поворот, вправо и «уронить».</div>
+        <div class="control-item"><b>Изображения:</b> положи рядом с файлом <code>journ.jpg</code> и <code>lomonosov.jpg</code>.</div>
+      </div>
+    </section>
+
+    <main class="panel center">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-title">ЛОМОНОСОВ-2026</div>
+          <div class="brand-subtitle">Секция «Журналистика»</div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="startBtn">Старт</button>
+          <button class="ghost" id="pauseBtn">Пауза</button>
+        </div>
+      </div>
+
+      <div class="game-shell">
+        <canvas id="gameCanvas" width="300" height="600" aria-label="Игровое поле"></canvas>
+        <div class="caption">Собирай линии и не дай фигурам дойти до верха.</div>
+      </div>
+
+      <div class="mobile-controls">
+        <button id="leftBtn" aria-label="Влево">←</button>
+        <button id="rotateBtn" aria-label="Поворот">⟳</button>
+        <button id="rightBtn" aria-label="Вправо">→</button>
+        <button id="dropBtn" class="drop-btn" aria-label="Уронить фигуру">Уронить фигуру</button>
+      </div>
+    </main>
+
+    <aside class="panel right">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Очки</div>
+          <div class="stat-value" id="score">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Линии</div>
+          <div class="stat-value" id="lines">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Уровень</div>
+          <div class="stat-value" id="level">1</div>
+        </div>
+      </div>
+
+      <div class="mini-label">Следующая фигура</div>
+      <canvas id="nextCanvas" width="170" height="170"></canvas>
+
+      <div class="footer-sign">
+        Белые изображения хорошо видны на светлом поле благодаря винтажной подложке,
+        бордовой рамке и мягкому золотистому акценту.
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const COLS = 10;
+    const ROWS = 20;
+    const BLOCK = 30;
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const nextCanvas = document.getElementById('nextCanvas');
+    const nextCtx = nextCanvas.getContext('2d');
+
+    const scoreEl = document.getElementById('score');
+    const linesEl = document.getElementById('lines');
+    const levelEl = document.getElementById('level');
+
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const dropBtn = document.getElementById('dropBtn');
+
+    const journImg = new Image();
+    const lomonosovImg = new Image();
+    journImg.src = 'journ.jpg';
+    lomonosovImg.src = 'lomonosov.jpg';
+
+    const COLORS = {
+      I: '#c8a96b',
+      O: '#d5917b',
+      T: '#b85e73',
+      S: '#b7a16a',
+      Z: '#c87c90',
+      J: '#8a2f45',
+      L: '#d2b57a'
+    };
+
+    const SHAPES = {
+      I: [[1, 1, 1, 1]],
+      O: [[1, 1], [1, 1]],
+      T: [[0, 1, 0], [1, 1, 1]],
+      S: [[0, 1, 1], [1, 1, 0]],
+      Z: [[1, 1, 0], [0, 1, 1]],
+      J: [[1, 0, 0], [1, 1, 1]],
+      L: [[0, 0, 1], [1, 1, 1]]
+    };
+
+    const TYPES = Object.keys(SHAPES);
+
+    let board, currentPiece, nextPiece;
+    let score = 0;
+    let lines = 0;
+    let level = 1;
+    let dropCounter = 0;
+    let lastTime = 0;
+    let dropInterval = 800;
+    let running = false;
+    let paused = false;
+    let animationId = null;
+
+    function createBoard() {
+      return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+    }
+
+    function randomType() {
+      return TYPES[Math.floor(Math.random() * TYPES.length)];
+    }
+
+    function createPiece(type = randomType()) {
+      return {
+        x: Math.floor(COLS / 2) - 1,
+        y: 0,
+        type,
+        shape: SHAPES[type].map(row => [...row]),
+        color: COLORS[type],
+        imageTile: Math.random() < 0.38
+      };
+    }
+
+    function resetGame() {
+      board = createBoard();
+      score = 0;
+      lines = 0;
+      level = 1;
+      dropInterval = 800;
+      currentPiece = createPiece();
+      nextPiece = createPiece();
+      running = true;
+      paused = false;
+      pauseBtn.textContent = 'Пауза';
+      updateStats();
+      drawNextPiece();
+      draw();
+    }
+
+    function collide(piece, boardRef = board) {
+      for (let y = 0; y < piece.shape.length; y++) {
+        for (let x = 0; x < piece.shape[y].length; x++) {
+          if (!piece.shape[y][x]) continue;
+          const newX = piece.x + x;
+          const newY = piece.y + y;
+          if (
+            newX < 0 ||
+            newX >= COLS ||
+            newY >= ROWS ||
+            (newY >= 0 && boardRef[newY][newX])
+          ) return true;
+        }
+      }
+      return false;
+    }
+
+    function merge() {
+      currentPiece.shape.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            board[currentPiece.y + y][currentPiece.x + x] = {
+              color: currentPiece.color,
+              imageTile: currentPiece.imageTile
+            };
+          }
+        });
+      });
+    }
+
+    function rotateMatrix(matrix) {
+      return matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+    }
+
+    function playerRotate() {
+      if (!running || paused) return;
+      const original = currentPiece.shape;
+      const rotated = rotateMatrix(original);
+      const oldX = currentPiece.x;
+      currentPiece.shape = rotated;
+      let offset = 1;
+      while (collide(currentPiece)) {
+        currentPiece.x += offset;
+        offset = -(offset + (offset > 0 ? 1 : -1));
+        if (Math.abs(offset) > currentPiece.shape[0].length + 1) {
+          currentPiece.shape = original;
+          currentPiece.x = oldX;
+          return;
+        }
+      }
+      draw();
+    }
+
+    function sweepRows() {
+      let cleared = 0;
+      outer: for (let y = ROWS - 1; y >= 0; y--) {
+        for (let x = 0; x < COLS; x++) {
+          if (!board[y][x]) continue outer;
+        }
+        board.splice(y, 1);
+        board.unshift(Array(COLS).fill(0));
+        y++;
+        cleared++;
+      }
+
+      if (cleared > 0) {
+        const pointsMap = { 1: 100, 2: 300, 3: 500, 4: 800 };
+        score += (pointsMap[cleared] || 0) * level;
+        lines += cleared;
+        level = Math.floor(lines / 8) + 1;
+        dropInterval = Math.max(160, 800 - (level - 1) * 70);
+        updateStats();
+      }
+    }
+
+    function spawnNext() {
+      currentPiece = nextPiece;
+      currentPiece.x = Math.floor(COLS / 2) - Math.ceil(currentPiece.shape[0].length / 2);
+      currentPiece.y = 0;
+      nextPiece = createPiece();
+      drawNextPiece();
+      if (collide(currentPiece)) {
+        running = false;
+      }
+    }
+
+    function playerDrop() {
+      if (!running || paused) return;
+      currentPiece.y++;
+      if (collide(currentPiece)) {
+        currentPiece.y--;
+        merge();
+        sweepRows();
+        spawnNext();
+      }
+      dropCounter = 0;
+      draw();
+    }
+
+    function hardDrop() {
+      if (!running || paused) return;
+      while (!collide(currentPiece)) {
+        currentPiece.y++;
+      }
+      currentPiece.y--;
+      merge();
+      sweepRows();
+      spawnNext();
+      draw();
+    }
+
+    function playerMove(dir) {
+      if (!running || paused) return;
+      currentPiece.x += dir;
+      if (collide(currentPiece)) currentPiece.x -= dir;
+      draw();
+    }
+
+    function update(time = 0) {
+      if (!running) {
+        draw();
+        return;
+      }
+      if (paused) return;
+
+      const delta = time - lastTime;
+      lastTime = time;
+      dropCounter += delta;
+      if (dropCounter > dropInterval) playerDrop();
+      draw();
+      animationId = requestAnimationFrame(update);
+    }
+
+    function roundRect(targetCtx, x, y, width, height, radius) {
+      targetCtx.beginPath();
+      targetCtx.moveTo(x + radius, y);
+      targetCtx.arcTo(x + width, y, x + width, y + height, radius);
+      targetCtx.arcTo(x + width, y + height, x, y + height, radius);
+      targetCtx.arcTo(x, y + height, x, y, radius);
+      targetCtx.arcTo(x, y, x + width, y, radius);
+      targetCtx.closePath();
+    }
+
+    function drawGrid() {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(95, 47, 58, 0.08)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= COLS; x++) {
+        ctx.beginPath();
+        ctx.moveTo(x * BLOCK + 0.5, 0);
+        ctx.lineTo(x * BLOCK + 0.5, ROWS * BLOCK);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= ROWS; y++) {
+        ctx.beginPath();
+        ctx.moveTo(0, y * BLOCK + 0.5);
+        ctx.lineTo(COLS * BLOCK, y * BLOCK + 0.5);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawCell(targetCtx, x, y, color, imageTile = false, size = BLOCK) {
+      const px = x * size;
+      const py = y * size;
+
+      targetCtx.save();
+
+      const grd = targetCtx.createLinearGradient(px, py, px + size, py + size);
+      grd.addColorStop(0, color);
+      grd.addColorStop(1, 'rgba(255,255,255,0.55)');
+
+      targetCtx.fillStyle = grd;
+      roundRect(targetCtx, px + 1.5, py + 1.5, size - 3, size - 3, 7);
+      targetCtx.fill();
+
+      targetCtx.strokeStyle = 'rgba(95, 47, 58, 0.16)';
+      roundRect(targetCtx, px + 1.5, py + 1.5, size - 3, size - 3, 7);
+      targetCtx.stroke();
+
+      if (imageTile) {
+        targetCtx.save();
+        roundRect(targetCtx, px + 3, py + 3, size - 6, size - 6, 6);
+        targetCtx.clip();
+        targetCtx.fillStyle = 'rgba(255, 248, 240, 0.92)';
+        targetCtx.fillRect(px + 3, py + 3, size - 6, size - 6);
+
+        const half = (size - 6) / 2;
+        if (journImg.complete) targetCtx.drawImage(journImg, px + 3, py + 3, half, size - 6);
+        if (lomonosovImg.complete) targetCtx.drawImage(lomonosovImg, px + 3 + half, py + 3, half, size - 6);
+
+        targetCtx.strokeStyle = 'rgba(138, 47, 69, 0.18)';
+        targetCtx.beginPath();
+        targetCtx.moveTo(px + 3 + half, py + 5);
+        targetCtx.lineTo(px + 3 + half, py + size - 5);
+        targetCtx.stroke();
+
+        targetCtx.shadowColor = 'rgba(200, 169, 107, 0.4)';
+        targetCtx.shadowBlur = 12;
+        targetCtx.strokeStyle = 'rgba(200, 169, 107, 0.32)';
+        roundRect(targetCtx, px + 3, py + 3, size - 6, size - 6, 6);
+        targetCtx.stroke();
+        targetCtx.restore();
+      }
+
+      targetCtx.restore();
+    }
+
+    function drawMatrix(matrix, offset, color, imageTile, targetCtx = ctx, size = BLOCK) {
+      matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) drawCell(targetCtx, x + offset.x, y + offset.y, color, imageTile, size);
+        });
+      });
+    }
+
+    function drawBoard() {
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          const cell = board[y][x];
+          if (cell) drawCell(ctx, x, y, cell.color, cell.imageTile);
+        }
+      }
+    }
+
+    function drawOverlay(text, subtext) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(255, 249, 243, 0.82)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#8a2f45';
+      ctx.font = '700 28px Inter, Arial';
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2 - 10);
+      ctx.fillStyle = '#7a5b60';
+      ctx.font = '400 15px Inter, Arial';
+      ctx.fillText(subtext, canvas.width / 2, canvas.height / 2 + 24);
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGrid();
+      if (board) drawBoard();
+      if (currentPiece && running) {
+        drawMatrix(currentPiece.shape, { x: currentPiece.x, y: currentPiece.y }, currentPiece.color, currentPiece.imageTile);
+      }
+      if (!running && board) {
+        drawOverlay('Игра окончена', 'Нажми «Старт», чтобы сыграть снова');
+      } else if (paused) {
+        drawOverlay('Пауза', 'Нажми кнопку или клавишу P');
+      }
+    }
+
+    function drawNextPiece() {
+      nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+      if (!nextPiece) return;
+      const size = 28;
+      const w = nextPiece.shape[0].length;
+      const h = nextPiece.shape.length;
+      const offsetX = Math.floor((nextCanvas.width / size - w) / 2);
+      const offsetY = Math.floor((nextCanvas.height / size - h) / 2);
+      drawMatrix(nextPiece.shape, { x: offsetX, y: offsetY }, nextPiece.color, nextPiece.imageTile, nextCtx, size);
+    }
+
+    function updateStats() {
+      scoreEl.textContent = score;
+      linesEl.textContent = lines;
+      levelEl.textContent = level;
+    }
+
+    function startGame() {
+      cancelAnimationFrame(animationId);
+      resetGame();
+      lastTime = 0;
+      animationId = requestAnimationFrame(update);
+    }
+
+    function togglePause() {
+      if (!running) return;
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'Продолжить' : 'Пауза';
+      if (!paused) {
+        lastTime = performance.now();
+        animationId = requestAnimationFrame(update);
+      } else {
+        draw();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') playerMove(-1);
+      else if (e.key === 'ArrowRight') playerMove(1);
+      else if (e.key === 'ArrowDown') playerDrop();
+      else if (e.key === 'ArrowUp') playerRotate();
+      else if (e.code === 'Space') {
+        e.preventDefault();
+        hardDrop();
+      } else if (e.key.toLowerCase() === 'p') togglePause();
+    });
+
+    function holdAction(fn) {
+      return (e) => {
+        e.preventDefault();
+        fn();
+      };
+    }
+
+    startBtn.addEventListener('click', startGame);
+    pauseBtn.addEventListener('click', togglePause);
+    leftBtn.addEventListener('touchstart', holdAction(() => playerMove(-1)), { passive: false });
+    rightBtn.addEventListener('touchstart', holdAction(() => playerMove(1)), { passive: false });
+    rotateBtn.addEventListener('touchstart', holdAction(playerRotate), { passive: false });
+    dropBtn.addEventListener('touchstart', holdAction(hardDrop), { passive: false });
+
+    leftBtn.addEventListener('click', () => playerMove(-1));
+    rightBtn.addEventListener('click', () => playerMove(1));
+    rotateBtn.addEventListener('click', playerRotate);
+    dropBtn.addEventListener('click', hardDrop);
+
+    journImg.onload = () => draw();
+    lomonosovImg.onload = () => draw();
+
+    board = createBoard();
+    draw();
+    drawOverlay('Нажми «Старт»', 'ЛОМОНОСОВ-2026 · Секция «Журналистика»');
+  </script>
+</body>
+</html>
