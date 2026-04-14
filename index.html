@@ -649,40 +649,47 @@
 
       targetCtx.save();
 
-      const grd = targetCtx.createLinearGradient(px, py, px + size, py + size);
-      grd.addColorStop(0, color);
-      grd.addColorStop(1, 'rgba(255,255,255,0.55)');
-
-      targetCtx.fillStyle = grd;
-      roundRect(targetCtx, px + 1.5, py + 1.5, size - 3, size - 3, 7);
+      // base cell (softer, cleaner)
+      targetCtx.fillStyle = "#efe4d6";
+      roundRect(targetCtx, px + 2, py + 2, size - 4, size - 4, 8);
       targetCtx.fill();
 
-      targetCtx.strokeStyle = 'rgba(95, 47, 58, 0.16)';
-      roundRect(targetCtx, px + 1.5, py + 1.5, size - 3, size - 3, 7);
+      targetCtx.strokeStyle = "rgba(138,47,69,0.15)";
+      roundRect(targetCtx, px + 2, py + 2, size - 4, size - 4, 8);
       targetCtx.stroke();
 
       if (imageTile) {
         targetCtx.save();
-        roundRect(targetCtx, px + 3, py + 3, size - 6, size - 6, 6);
+
+        // clean white card for images
+        roundRect(targetCtx, px + 4, py + 4, size - 8, size - 8, 6);
         targetCtx.clip();
-        targetCtx.fillStyle = 'rgba(255, 248, 240, 0.92)';
-        targetCtx.fillRect(px + 3, py + 3, size - 6, size - 6);
 
-        const half = (size - 6) / 2;
-        if (journImg.complete) targetCtx.drawImage(journImg, px + 3, py + 3, half, size - 6);
-        if (lomonosovImg.complete) targetCtx.drawImage(lomonosovImg, px + 3 + half, py + 3, half, size - 6);
+        targetCtx.fillStyle = "#ffffff";
+        targetCtx.fillRect(px + 4, py + 4, size - 8, size - 8);
 
-        targetCtx.strokeStyle = 'rgba(138, 47, 69, 0.18)';
+        const half = (size - 8) / 2;
+
+        // draw images with margin (so they don't look squished)
+        if (journImg.complete) {
+          targetCtx.drawImage(journImg, px + 4, py + 4, half - 2, size - 8);
+        }
+        if (lomonosovImg.complete) {
+          targetCtx.drawImage(lomonosovImg, px + 6 + half, py + 4, half - 2, size - 8);
+        }
+
+        // divider line (clean, subtle)
+        targetCtx.strokeStyle = "rgba(0,0,0,0.08)";
         targetCtx.beginPath();
-        targetCtx.moveTo(px + 3 + half, py + 5);
-        targetCtx.lineTo(px + 3 + half, py + size - 5);
+        targetCtx.moveTo(px + 4 + half, py + 6);
+        targetCtx.lineTo(px + 4 + half, py + size - 6);
         targetCtx.stroke();
 
-        targetCtx.shadowColor = 'rgba(200, 169, 107, 0.4)';
-        targetCtx.shadowBlur = 12;
-        targetCtx.strokeStyle = 'rgba(200, 169, 107, 0.32)';
-        roundRect(targetCtx, px + 3, py + 3, size - 6, size - 6, 6);
+        // elegant border
+        targetCtx.strokeStyle = "rgba(138,47,69,0.2)";
+        roundRect(targetCtx, px + 4, py + 4, size - 8, size - 8, 6);
         targetCtx.stroke();
+
         targetCtx.restore();
       }
 
