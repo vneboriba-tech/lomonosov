@@ -6,16 +6,16 @@
   <title>ЛОМОНОСОВ-2026 | Секция Журналистика</title>
   <style>
     :root {
-      --bg: #f7f1ea;
-      --bg-soft: #fffaf5;
-      --panel: rgba(255, 252, 247, 0.86);
-      --text: #3b1f24;
-      --muted: #7a5b60;
-      --line: rgba(95, 47, 58, 0.12);
-      --accent: #8a2f45;
-      --accent-2: #b85e73;
-      --gold: #c8a96b;
-      --shadow: 0 18px 40px rgba(95, 47, 58, 0.14);
+      --bg: #07162f;
+      --bg-soft: #0d2348;
+      --panel: rgba(10, 24, 51, 0.88);
+      --text: #eef4ff;
+      --muted: #b7c7e7;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #5b8cff;
+      --accent-2: #8ab2ff;
+      --gold: #9bbcff;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
     }
 
     * {
@@ -29,8 +29,8 @@
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(200,169,107,0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(184,94,115,0.14), transparent 24%),
+        radial-gradient(circle at top left, rgba(138,178,255,0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(91,140,255,0.12), transparent 24%),
         linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
     }
 
@@ -73,7 +73,7 @@
       display: inline-flex;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(138, 47, 69, 0.08);
+      background: rgba(91, 140, 255, 0.12);
       color: var(--accent);
       font-size: 13px;
       font-weight: 700;
@@ -109,7 +109,7 @@
       padding: 13px 14px;
       border-radius: 18px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.54);
+      background: rgba(255,255,255,0.04);
       color: var(--muted);
       font-size: 14px;
       line-height: 1.45;
@@ -177,18 +177,18 @@
     .primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: white;
-      box-shadow: 0 10px 24px rgba(138, 47, 69, 0.22);
+      box-shadow: 0 10px 24px rgba(91, 140, 255, 0.22);
     }
 
     .ghost {
-      background: rgba(138, 47, 69, 0.08);
+      background: rgba(91, 140, 255, 0.12);
       color: var(--accent);
     }
 
     .game-shell {
       width: 100%;
       border-radius: 26px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,248,242,0.92));
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
       border: 1px solid var(--line);
       padding: 14px;
     }
@@ -197,9 +197,9 @@
       display: block;
       width: 100%;
       border-radius: 20px;
-      background: linear-gradient(180deg, #f9f2ea 0%, #f3e5d7 100%);
-      border: 1px solid rgba(95, 47, 58, 0.12);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.46);
+      background: linear-gradient(180deg, #0d2348 0%, #08182f 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
     .caption {
@@ -221,17 +221,17 @@
       min-height: 52px;
       font-size: 20px;
       border-radius: 18px;
-      background: rgba(138, 47, 69, 0.08);
+      background: rgba(91, 140, 255, 0.12);
       color: var(--accent);
-      border: 1px solid rgba(138, 47, 69, 0.1);
+      border: 1px solid rgba(91, 140, 255, 0.18);
     }
 
     .drop-btn {
       grid-column: span 3;
       font-size: 16px !important;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--gold), #e6cf9a) !important;
-      color: #4b3320 !important;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+      color: #ffffff !important;
     }
 
     .stats {
@@ -243,7 +243,7 @@
       padding: 14px;
       border-radius: 18px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.54);
+      background: rgba(255,255,255,0.04);
     }
 
     .stat-label {
@@ -271,7 +271,7 @@
     #nextCanvas {
       max-width: 170px;
       aspect-ratio: 1/1;
-      background: linear-gradient(180deg, #fff9f3, #f6ecde);
+      background: linear-gradient(180deg, #10264d, #0a1c36);
     }
 
     .footer-sign {
@@ -321,12 +321,11 @@
   <div class="app">
     <section class="panel left">
       <div class="sup">ЛОМОНОСОВ-2026</div>
-      <h1>Journ Tetris</h1>
+      <h1>Тетрис журфака</h1>
       <p class="section-line"><b>Секция «Журналистика»</b></p>
       <div class="description">
         Игра работает и <b>на компьютере</b>, и <b>на телефоне</b>.
         На компьютере — клавиши, на телефоне — большие кнопки управления под игровым полем.
-        Некоторые клетки фигур оформлены как двойные изображения: <code>journ.jpg</code> + <code>lomonosov.jpg</code>.
       </div>
 
       <div class="control-list">
@@ -381,8 +380,7 @@
       <canvas id="nextCanvas" width="170" height="170"></canvas>
 
       <div class="footer-sign">
-        Белые изображения хорошо видны на светлом поле благодаря винтажной подложке,
-        бордовой рамке и мягкому золотистому акценту.
+        Белые изображения хорошо видны на тёмном поле благодаря светлой подложке внутри специальных клеток.
       </div>
     </aside>
   </div>
@@ -414,13 +412,13 @@
     lomonosovImg.src = 'lomonosov.jpg';
 
     const COLORS = {
-      I: '#c8a96b',
-      O: '#d5917b',
-      T: '#b85e73',
-      S: '#b7a16a',
-      Z: '#c87c90',
-      J: '#8a2f45',
-      L: '#d2b57a'
+      I: '#7ea6ff',
+      O: '#9fc0ff',
+      T: '#5b8cff',
+      S: '#78a0f5',
+      Z: '#6b93eb',
+      J: '#4f7df0',
+      L: '#8ab2ff'
     };
 
     const SHAPES = {
@@ -455,13 +453,18 @@
     }
 
     function createPiece(type = randomType()) {
+      const specialRoll = Math.random();
+      let imageType = null;
+      if (specialRoll < 0.18) imageType = 'journ';
+      else if (specialRoll < 0.36) imageType = 'lomonosov';
+
       return {
         x: Math.floor(COLS / 2) - 1,
         y: 0,
         type,
         shape: SHAPES[type].map(row => [...row]),
         color: COLORS[type],
-        imageTile: Math.random() < 0.38
+        imageType
       };
     }
 
@@ -504,7 +507,7 @@
           if (value) {
             board[currentPiece.y + y][currentPiece.x + x] = {
               color: currentPiece.color,
-              imageTile: currentPiece.imageTile
+              imageType: currentPiece.imageType
             };
           }
         });
@@ -626,7 +629,7 @@
 
     function drawGrid() {
       ctx.save();
-      ctx.strokeStyle = 'rgba(95, 47, 58, 0.08)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
       ctx.lineWidth = 1;
       for (let x = 0; x <= COLS; x++) {
         ctx.beginPath();
@@ -643,63 +646,48 @@
       ctx.restore();
     }
 
-    function drawCell(targetCtx, x, y, color, imageTile = false, size = BLOCK) {
+    function drawCell(targetCtx, x, y, color, imageType = null, size = BLOCK) {
       const px = x * size;
       const py = y * size;
 
       targetCtx.save();
 
-      // base cell (softer, cleaner)
-      targetCtx.fillStyle = "#efe4d6";
+      const grd = targetCtx.createLinearGradient(px, py, px + size, py + size);
+      grd.addColorStop(0, color);
+      grd.addColorStop(1, 'rgba(255,255,255,0.18)');
+      targetCtx.fillStyle = grd;
       roundRect(targetCtx, px + 2, py + 2, size - 4, size - 4, 8);
       targetCtx.fill();
 
-      targetCtx.strokeStyle = "rgba(138,47,69,0.15)";
+      targetCtx.strokeStyle = 'rgba(255,255,255,0.12)';
       roundRect(targetCtx, px + 2, py + 2, size - 4, size - 4, 8);
       targetCtx.stroke();
 
-      if (imageTile) {
+      if (imageType) {
         targetCtx.save();
-
-        // clean white card for images
-        roundRect(targetCtx, px + 4, py + 4, size - 8, size - 8, 6);
+        roundRect(targetCtx, px + 5, py + 5, size - 10, size - 10, 6);
         targetCtx.clip();
+        targetCtx.fillStyle = '#ffffff';
+        targetCtx.fillRect(px + 5, py + 5, size - 10, size - 10);
 
-        targetCtx.fillStyle = "#ffffff";
-        targetCtx.fillRect(px + 4, py + 4, size - 8, size - 8);
-
-        const half = (size - 8) / 2;
-
-        // draw images with margin (so they don't look squished)
-        if (journImg.complete) {
-          targetCtx.drawImage(journImg, px + 4, py + 4, half - 2, size - 8);
-        }
-        if (lomonosovImg.complete) {
-          targetCtx.drawImage(lomonosovImg, px + 6 + half, py + 4, half - 2, size - 8);
+        const img = imageType === 'journ' ? journImg : lomonosovImg;
+        if (img.complete) {
+          targetCtx.drawImage(img, px + 5, py + 5, size - 10, size - 10);
         }
 
-        // divider line (clean, subtle)
-        targetCtx.strokeStyle = "rgba(0,0,0,0.08)";
-        targetCtx.beginPath();
-        targetCtx.moveTo(px + 4 + half, py + 6);
-        targetCtx.lineTo(px + 4 + half, py + size - 6);
+        targetCtx.strokeStyle = 'rgba(91,140,255,0.35)';
+        roundRect(targetCtx, px + 5, py + 5, size - 10, size - 10, 6);
         targetCtx.stroke();
-
-        // elegant border
-        targetCtx.strokeStyle = "rgba(138,47,69,0.2)";
-        roundRect(targetCtx, px + 4, py + 4, size - 8, size - 8, 6);
-        targetCtx.stroke();
-
         targetCtx.restore();
       }
 
       targetCtx.restore();
     }
 
-    function drawMatrix(matrix, offset, color, imageTile, targetCtx = ctx, size = BLOCK) {
+    function drawMatrix(matrix, offset, color, imageType, targetCtx = ctx, size = BLOCK) {
       matrix.forEach((row, y) => {
         row.forEach((value, x) => {
-          if (value) drawCell(targetCtx, x + offset.x, y + offset.y, color, imageTile, size);
+          if (value) drawCell(targetCtx, x + offset.x, y + offset.y, color, imageType, size);
         });
       });
     }
@@ -708,20 +696,20 @@
       for (let y = 0; y < ROWS; y++) {
         for (let x = 0; x < COLS; x++) {
           const cell = board[y][x];
-          if (cell) drawCell(ctx, x, y, cell.color, cell.imageTile);
+          if (cell) drawCell(ctx, x, y, cell.color, cell.imageType);
         }
       }
     }
 
     function drawOverlay(text, subtext) {
       ctx.save();
-      ctx.fillStyle = 'rgba(255, 249, 243, 0.82)';
+      ctx.fillStyle = 'rgba(10, 24, 51, 0.82)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.textAlign = 'center';
-      ctx.fillStyle = '#8a2f45';
+      ctx.fillStyle = '#8ab2ff';
       ctx.font = '700 28px Inter, Arial';
       ctx.fillText(text, canvas.width / 2, canvas.height / 2 - 10);
-      ctx.fillStyle = '#7a5b60';
+      ctx.fillStyle = '#b7c7e7';
       ctx.font = '400 15px Inter, Arial';
       ctx.fillText(subtext, canvas.width / 2, canvas.height / 2 + 24);
       ctx.restore();
@@ -732,7 +720,7 @@
       drawGrid();
       if (board) drawBoard();
       if (currentPiece && running) {
-        drawMatrix(currentPiece.shape, { x: currentPiece.x, y: currentPiece.y }, currentPiece.color, currentPiece.imageTile);
+        drawMatrix(currentPiece.shape, { x: currentPiece.x, y: currentPiece.y }, currentPiece.color, currentPiece.imageType);
       }
       if (!running && board) {
         drawOverlay('Игра окончена', 'Нажми «Старт», чтобы сыграть снова');
@@ -749,7 +737,7 @@
       const h = nextPiece.shape.length;
       const offsetX = Math.floor((nextCanvas.width / size - w) / 2);
       const offsetY = Math.floor((nextCanvas.height / size - h) / 2);
-      drawMatrix(nextPiece.shape, { x: offsetX, y: offsetY }, nextPiece.color, nextPiece.imageTile, nextCtx, size);
+      drawMatrix(nextPiece.shape, { x: offsetX, y: offsetY }, nextPiece.color, nextPiece.imageType, nextCtx, size);
     }
 
     function updateStats() {
@@ -812,7 +800,7 @@
 
     board = createBoard();
     draw();
-    drawOverlay('Нажми «Старт»', 'ЛОМОНОСОВ-2026 · Секция «Журналистика»');
+    drawOverlay('Нажми «Старт»', 'Тетрис журфака · ЛОМОНОСОВ-2026');
   </script>
 </body>
 </html>
